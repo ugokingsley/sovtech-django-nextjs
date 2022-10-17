@@ -2,7 +2,7 @@ import json
 import pytest
 from graphene_django.utils.testing import graphql_query
 
-# Create a fixture using the graphql_query helper and `client` fixture from `pytest-django
+# Creating a fixture using the graphql_query helper and `client` fixture from `pytest-django
 @pytest.fixture
 def client_query(client):
     def func(*args, **kwargs):
@@ -10,7 +10,7 @@ def client_query(client):
 
     return func
 
-# Test you query using the client_query fixture
+# Test  query using the client_query fixture
 def test_resolve_actors(client_query):
     response = client_query(
         '''

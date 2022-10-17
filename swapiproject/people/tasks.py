@@ -8,6 +8,8 @@ import json
 
 logger = get_task_logger(__name__)
 
+# celery-beat tasks that crawls the swapi-api every 30 seconds
+# check for new updates and insert into Actor table
 @app.task
 def consume(link):
     response = requests.get(link)

@@ -23,15 +23,20 @@ class Query(graphene.ObjectType):
     users_by_id = graphene.Field(UserType, id=graphene.Int())
     actors_by_id = graphene.Field(PeopleType, id=graphene.Int())
 
+    # Check if a user is logged in
     def resolve_logged_in_user(self, info):
         user = info.context.user
         if user.is_anonymous:
             raise Exception('Not logged in!')
         return user
 
+    # Get all users in the database 
     def resolve_users(self, info):
         return User.objects.all()
 
+    # Get all actors from the swapi api
+    # Search by name
+    # Paginate the list of actors
     def resolve_actors(self, info, search=None, first=None, skip=None, **kwargs):
         qs = Actor.objects.all()
         if search:
@@ -45,6 +50,7 @@ class Query(graphene.ObjectType):
             qs = qs[:first]
         return qs
 
+    # Get details of individual actor
     def resolve_actors_by_id(self, info, id):
         try:
             return Actor.objects.get(id=id)

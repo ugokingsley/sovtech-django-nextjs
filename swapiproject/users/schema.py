@@ -8,6 +8,7 @@ class UserType(DjangoObjectType):
     class Meta:
         model = User
 
+# creates a new django user 
 class CreateUser(graphene.Mutation):
     user = graphene.Field(UserType)
 
